@@ -15,17 +15,15 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          `Noto Sans KR\:100,300,400,500,700,900`
-        ],
-        display: 'swap'
-      }
+        fonts: [`Noto Sans KR\:100,300,400,500,700,900`],
+        display: "swap",
+      },
     },
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: `claire-shin`
-      }
+        shortname: `claire-shin`,
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -42,9 +40,16 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-code-titles`,
+            options: {
+              className: `gatsby-remark-code-title`,
+            },
+          }, // IMPORTANT: this must be ahead of other plugins that use code blocks
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -57,7 +62,17 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              //showLineNumbers: true,
+              // prompt: {
+              //   user: "root",
+              //   host: "localhost",
+              //   global: false,
+              // },
+            },
+          },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],
@@ -71,7 +86,7 @@ module.exports = {
         //trackingId: `ADD YOUR TRACKING ID HERE`,
       },
     },
-    `gatsby-plugin-feed`,
+    `gatsby-plugin-feed-mdx`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
